@@ -19,10 +19,6 @@ describe "POST /" do
   end
 
   context "when Slack sends an event" do
-    before do
-      allow(IngestJob).to receive(:perform_later)
-    end
-
     let(:payload) do
       {
         "token" => "token",
@@ -51,7 +47,13 @@ describe "POST /" do
 
     it "queues the ingest job with the event data" do
       post "/", params: payload.to_json, headers: {"Content-Type" => "application/json"}
-      expect(IngestJob).to have_received(:perform_later).with(payload["event"])
+      job_args = enqueued_jobs[0]&.send(:[], :args)&.first
+      expect(job_args).to_not be_nil, "Job was not found"
+
+      expect(job_args["user"]).to eq "user"
+      expect(job_args["channel"]).to eq "channel"
+      expect(job_args["text"]).to eq "text"
+      expect(job_args["event_ts"]).to eq "1355517523"
     end
   end
 end

@@ -17,6 +17,11 @@ class SlackController < ApplicationController
   end
 
   def message_params
-    params.require(:event)
+    params.require(:event).permit(
+      :user,
+      :channel,
+      :text,
+      :event_ts
+    )
   end
 end
