@@ -1,18 +1,22 @@
 class SlackController < ApplicationController
   def handle
-    case slack_params["type"]
+    case params["type"]
     when "url_verification"
-      render json: slack_params["token"]
+      render json: challenge_token
 
     when "event_callback"
-      IngestJob.perform_later(slack_params["event"])
+      IngestJob.perform_later(message_params)
       render status: :accepted
     end
   end
 
   private
 
-  def slack_params
-    params.permit(:type, :challenge, :token, :event)
+  def challenge_token
+    params.require(:token)
+  end
+
+  def message_params
+    params.require(:event)
   end
 end
