@@ -3,7 +3,7 @@ class CreateLogs < ActiveRecord::Migration[6.0]
     create_table :logs do |t|
       t.string :user
       t.string :channel
-      t.string :message
+      t.text :message
       t.datetime :sent_at
 
       t.timestamps
