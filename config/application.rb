@@ -36,6 +36,6 @@ module Faronk
     config.api_only = true
     config.active_job_queue_adapter = :sidekiq
 
-    config.active_record.schema_format = :sql
+    #config.active_record.schema_format = :sql
   end
 end

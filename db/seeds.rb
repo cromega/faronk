@@ -14,3 +14,21 @@ Log.create!(
 )
 puts "done"
 
+if ENV["LOREM_IPSUM"]
+  require "faker"
+  puts "Filling DB with lorem ipsum logs"
+
+  100_000.times do |i|
+    puts i if i % 5_000 == 0
+
+    Log.create!(
+      user: "user",
+      channel: "dehat",
+      message: Faker::Lorem.sentence,
+      sent_at: DateTime.now,
+    )
+  end
+
+  puts "done"
+end
+

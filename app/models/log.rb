@@ -12,11 +12,17 @@ class Log < ApplicationRecord
       tsearch: {
         prefix: true,
         any_word: true,
-        dictionary: "simple",
         tsvector_column: "message_search_tsv",
       },
     }
 
+  after_save :update_search_index
 
+  private
 
+  def update_search_index
+    query = ActiveRecord::Base.sanitize_sql([
+      "UPDATE logs SET message_search_tsv = to_tsvector('simple', ?) WHERE id = ?", message, id])
+    ActiveRecord::Base.connection.execute(query)
+  end
 end

@@ -9,10 +9,17 @@ describe Log do
       expect(results.first&.message).to eq message
     end
 
+    it "can search for full word matches" do
+      message = "this is an important message"
+      create(:log, message: message)
+      results = Log.search_by_message("important")
+      expect(results.first&.message).to eq message
+    end
+
     it "can search for word prefixes" do
       message = "this is an important message"
       create(:log, message: message)
-      results = Log.search_by_message("importa")
+      results = Log.search_by_message("import")
       expect(results.first&.message).to eq message
     end
   end
