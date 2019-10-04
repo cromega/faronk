@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  post "/slack", to: "slack#handle", as: "slack"
+  root to: "home#index"
+  post "/slack", to: "slack#handle"
 end

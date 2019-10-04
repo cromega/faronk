@@ -6,7 +6,7 @@ class SlackController < ActionController::API
 
     when "event_callback"
       IngestJob.perform_later(message_params)
-      render status: :accepted
+      head :accepted
     end
   end
 

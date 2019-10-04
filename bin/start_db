@@ -1,1 +1,0 @@
-docker run --rm -p 5432:5432 --name faronk_db_dev -e POSTGRES_USER=faronk_development postgres:10
