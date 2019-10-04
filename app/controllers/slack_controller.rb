@@ -1,4 +1,4 @@
-class SlackController < ApplicationController
+class SlackController < ActionController::API
   def handle
     case params["type"]
     when "url_verification"

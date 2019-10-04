@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "POST /" do
+describe "POST /slack" do
   context "when Slack registers the webhook" do
     let(:token) { "Jhj5dZrVaK7ZwHHjRyZWjbDl" }
     let(:payload) do
@@ -12,7 +12,7 @@ describe "POST /" do
     end
 
     it "responds with the challenge token" do
-      post "/", params: payload.to_json, headers: {"Content-Type" => "application/json"}
+      post "/slack", params: payload.to_json, headers: {"Content-Type" => "application/json"}
 
       expect(response.body).to eq token
     end
@@ -41,12 +41,12 @@ describe "POST /" do
     end
 
     it "accepts the payload" do
-      post "/", params: payload.to_json, headers: {"Content-Type" => "application/json"}
+      post "/slack", params: payload.to_json, headers: {"Content-Type" => "application/json"}
       expect(response.status).to eq 202
     end
 
     it "queues the ingest job with the event data" do
-      post "/", params: payload.to_json, headers: {"Content-Type" => "application/json"}
+      post "/slack", params: payload.to_json, headers: {"Content-Type" => "application/json"}
       job_args = enqueued_jobs[0]&.send(:[], :args)&.first
       expect(job_args).to_not be_nil, "Job was not found"
 
