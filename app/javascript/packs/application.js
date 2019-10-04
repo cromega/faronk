@@ -4,7 +4,8 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-require("@rails/activestorage").start()
+require("lib/umbrella-3.1.0.min")
+require("lib/handlebars-4.4.0.min")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
