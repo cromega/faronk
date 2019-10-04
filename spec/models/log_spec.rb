@@ -22,6 +22,13 @@ describe Log do
       results = Log.search_by_message("import")
       expect(results.first&.message).to eq message
     end
+
+    xit "can search for word parts" do
+      message = "this is an important message"
+      create(:log, message: message)
+      results = Log.search_by_message("porta")
+      expect(results.first&.message).to eq message
+    end
   end
 end
 
