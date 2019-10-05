@@ -16,6 +16,8 @@ class Log < ApplicationRecord
       },
     }
 
+  scope :by_timestamp, -> { order(sent_at: :asc) }
+
   after_save :update_search_index
 
   private

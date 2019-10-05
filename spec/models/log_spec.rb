@@ -30,5 +30,15 @@ describe Log do
       expect(results.first&.message).to eq message
     end
   end
+
+  describe "::by_timestamp" do
+    let!(:log1) { create(:log, sent_at: Time.current) }
+    let!(:log2) { create(:log, sent_at: Time.current - 5.minutes) }
+
+    it "returns logs ordered by the message timestamp" do
+      logs = Log.by_timestamp.limit(2)
+      expect(logs).to eq [log2, log1]
+    end
+  end
 end
 
