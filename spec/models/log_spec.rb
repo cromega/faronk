@@ -35,9 +35,9 @@ describe Log do
     let!(:log1) { create(:log, sent_at: Time.current) }
     let!(:log2) { create(:log, sent_at: Time.current - 5.minutes) }
 
-    it "returns logs ordered by the message timestamp" do
+    it "returns logs reverse ordered by the message timestamp" do
       logs = Log.by_timestamp.limit(2)
-      expect(logs).to eq [log2, log1]
+      expect(logs).to eq [log1, log2]
     end
   end
 end

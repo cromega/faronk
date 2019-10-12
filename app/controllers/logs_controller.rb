@@ -6,7 +6,7 @@ class LogsController < ApplicationController
       end
 
       format.json do
-        logs = Log.limit(50)
+        logs = Log.by_timestamp.limit(50)
         render json: logs
       end
     end

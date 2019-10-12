@@ -1,0 +1,13 @@
+#logs_container {
+  .inline { float: left }
+  .channel-header { 
+    border-bottom: 1px solid gray;
+    margin-bottom: 10px;
+    span { font-weight: bold; }
+  }
+
+  .log-container {
+    .timestamp { margin-right: 5px }
+    .user { margin-right: 5px }
+  }
+}

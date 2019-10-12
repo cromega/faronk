@@ -4,8 +4,6 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-//require("lib/umbrella-3.1.0.min")
-require("lib/handlebars-4.4.0.min")
 
 import Turbolinks from "turbolinks"
 Turbolinks.start()
