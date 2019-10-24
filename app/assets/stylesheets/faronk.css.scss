@@ -1,13 +1,18 @@
+.inline { float: left }
+
 #logs_container {
-  .inline { float: left }
-  .channel-header { 
-    border-bottom: 1px solid gray;
-    margin-bottom: 10px;
-    span { font-weight: bold; }
-  }
+  width: 800px;
+  padding: 10px;
+  border: 1px solid gray;
+  box-shadow: 1px 2px;
+  font-family: "Courier New", Courier, monospace;
 
   .log-container {
-    .timestamp { margin-right: 5px }
-    .user { margin-right: 5px }
+    .vertical-separator {
+      @extend .inline;
+      border-left: 2px solid black;
+      height: 18px;
+      margin: 0px 5px 0px 5px;
+    }
   }
 }

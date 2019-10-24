@@ -1,26 +1,5 @@
-<div data-controller="logs" data-logs-url="/logs.json">
-  <div id="logs_container">
-    <div class="channel-header">
-      Messages in <span data-target="logs.channel"></span>
-    </div>
-    <div data-target="logs.logs"></div>
-  </div>
+<div>
+  <h2>Logs</h2>
+  <div id="app"></div>
 </div>
 
-<template id="log_template">
-  <div class="log-container">
-    <div class="timestamp inline">
-      {{formatDate sent_at}}|
-    </div>
-
-    <div class="user inline">
-      {{user}}:
-    </div>
-
-    <div class="message">
-      {{message}}
-    </div>
-
-    <div class="clearer"></div>
-  </div>
-</template>
