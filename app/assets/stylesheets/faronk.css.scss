@@ -8,11 +8,16 @@
   font-family: "Courier New", Courier, monospace;
 
   .log-container {
-    .vertical-separator {
+    .timestamp-separator {
       @extend .inline;
       border-left: 2px solid black;
       height: 18px;
       margin: 0px 5px 0px 5px;
+    }
+    .user-separator {
+      @extend .inline;
+      margin-right: 5px;
+      font-weight: bold;
     }
   }
 }

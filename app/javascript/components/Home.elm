@@ -75,8 +75,9 @@ formatLog : Log -> Html Msg
 formatLog log =
   div [ class "log-container" ]
     [ div [ class "timestamp inline" ] [ text (formatDate log.timestamp) ]
-    , div [ class "vertical-separator" ] []
+    , div [ class "timestamp-separator" ] []
     , div [ class "user inline" ] [ text log.user ]
+    , div [ class "user-separator" ] [ text ":" ]
     , div [ class "message" ] [ text log.message ]
     ]
 
