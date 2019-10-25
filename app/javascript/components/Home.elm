@@ -69,7 +69,7 @@ view model =
       h3 [] [ text "getting logs failed spectacularly" ]
 
     Success logs ->
-      div [ id "logs_container" ] (List.map formatLog logs)
+      div [ id "logs_container" ] (List.map formatLog (List.reverse logs))
 
 formatLog : Log -> Html Msg
 formatLog log =
