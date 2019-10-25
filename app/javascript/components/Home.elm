@@ -4,11 +4,13 @@ import Browser
 import Html exposing (..)
 import Html.Attributes exposing (id, class)
 import Http
-import Json.Decode as Decode exposing (Decoder, string)
+import Json.Decode as Decode exposing (Decoder, string, int)
 import Json.Decode.Pipeline exposing (required)
+import Time
+import DateFormat
 
 type alias Log =
-  { timestamp : String
+  { timestamp : Int
   , user : String
   , message : String
   }
@@ -72,11 +74,25 @@ view model =
 formatLog : Log -> Html Msg
 formatLog log =
   div [ class "log-container" ]
-    [ div [ class "timestamp inline" ] [ text log.timestamp ]
+    [ div [ class "timestamp inline" ] [ text (formatDate log.timestamp) ]
     , div [ class "vertical-separator" ] []
     , div [ class "user inline" ] [ text log.user ]
     , div [ class "message" ] [ text log.message ]
     ]
+
+dateFormatter : Time.Zone -> Time.Posix -> String
+dateFormatter =
+  DateFormat.format
+    [ DateFormat.hourMilitaryFixed
+    , DateFormat.text ":"
+    , DateFormat.minuteFixed
+    , DateFormat.text ":"
+    , DateFormat.secondFixed
+    ]
+
+formatDate : Int -> String
+formatDate timestamp =
+  dateFormatter Time.utc (Time.millisToPosix timestamp)
 
 
 -- HTTP
@@ -95,7 +111,7 @@ decodeLogs =
 logDecoder : Decoder Log
 logDecoder =
   Decode.succeed Log
-      |> required "sent_at" string
+      |> required "sent_at" int
       |> required "user" string
       |> required "message" string
 

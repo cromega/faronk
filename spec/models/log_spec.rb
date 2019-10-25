@@ -40,5 +40,13 @@ describe Log do
       expect(logs).to eq [log1, log2]
     end
   end
+
+  describe "JSON serialization" do
+    let!(:log) { create(:log, sent_at: "Thu, Oct 24, 2019 11:00:00 PM GMT+01:00") }
+    it "returns the timestamp as a unix epoch with milliseconds" do
+      json = log.to_json
+      expect(JSON.parse(json)["sent_at"]).to eq 1571954400000
+    end
+  end
 end
 

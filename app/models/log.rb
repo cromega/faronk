@@ -20,6 +20,12 @@ class Log < ApplicationRecord
 
   after_save :update_search_index
 
+  def as_json(*)
+    super.tap do |data|
+      data["sent_at"] = sent_at.to_i * 1000
+    end
+  end
+
   private
 
   def update_search_index
