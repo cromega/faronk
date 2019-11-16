@@ -74,7 +74,7 @@ view model =
 formatLog : Log -> Html Msg
 formatLog log =
   div [ class "log-container" ]
-    [ div [ class "timestamp inline" ] [ text (formatDate log.timestamp) ]
+    [ div [ class "timestamp inline" ] [ formatDate log.timestamp ]
     , div [ class "timestamp-separator" ] []
     , div [ class "user inline" ] [ text log.user ]
     , div [ class "user-separator" ] [ text ":" ]
@@ -91,9 +91,9 @@ dateFormatter =
     , DateFormat.secondFixed
     ]
 
-formatDate : Int -> String
+formatDate : Int -> Html Msg
 formatDate timestamp =
-  dateFormatter Time.utc (Time.millisToPosix timestamp)
+  text (dateFormatter Time.utc (Time.millisToPosix timestamp))
 
 
 -- HTTP
