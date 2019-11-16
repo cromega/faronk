@@ -2,12 +2,13 @@ module Home exposing (main)
 
 import Browser
 import Html exposing (..)
-import Html.Attributes exposing (id, class)
+import Html.Attributes exposing (id, class, href, target)
 import Http
 import Json.Decode as Decode exposing (Decoder, string, int)
 import Json.Decode.Pipeline exposing (required)
 import Time
 import DateFormat
+import LinkDetector exposing (..)
 
 type alias Log =
   { timestamp : Int
@@ -78,8 +79,20 @@ formatLog log =
     , div [ class "timestamp-separator" ] []
     , div [ class "user inline" ] [ text log.user ]
     , div [ class "user-separator" ] [ text ":" ]
-    , div [ class "message" ] [ text log.message ]
+    , div [ class "message" ] (formatMessage log.message)
     ]
+
+formatMessage : String -> List (Html Msg)
+formatMessage message =
+  LinkDetector.splitLine message
+    |> List.map messagePartFormatter
+
+messagePartFormatter : LogPart -> Html Msg
+messagePartFormatter part =
+  case part of
+    Text words -> text words
+    URL url -> a [ class "link", href url, target "_blank" ] [ text url ]
+
 
 dateFormatter : Time.Zone -> Time.Posix -> String
 dateFormatter =
