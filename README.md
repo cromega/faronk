@@ -1,24 +1,19 @@
-# README
+# Faronk
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Prepare
 
-Things you may want to cover:
+```
+docker-compose up -d
+bundle install
+bundle exec rake db:setup
 
-* Ruby version
+yarn
+```
 
-* System dependencies
+## Tests
 
-* Configuration
+```
+bundle exec rspec # ruby specs
+bundle exec yarn run elm-test # elm specs
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
